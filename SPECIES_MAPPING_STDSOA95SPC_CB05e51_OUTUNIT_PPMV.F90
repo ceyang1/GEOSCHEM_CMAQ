@@ -333,7 +333,7 @@ CONC_GEOS_SPECS_MAPPED(:,:,:,51) = 0.9*( CONC_GEOS(:,:,:,37) + CONC_GEOS(:,:,:,3
                                  + 0.01075 * CONC_GEOS(:,:,:,38)
 
 ! [ APOCI   ] (CMAQ 52) = 0.1 * ( [ OCPO ] (GC 37) + [ OCPI ] (GC 35) )
-CONC_GEOS_SPECS_MAPPED(:,:,:,52) = 0.9*( CONC_GEOS(:,:,:,37) + CONC_GEOS(:,:,:,35) )
+CONC_GEOS_SPECS_MAPPED(:,:,:,52) = 0.1*( CONC_GEOS(:,:,:,37) + CONC_GEOS(:,:,:,35) )
 
 ! [ APNCOMJ ] (CMAQ 53) = 0.4*0.9*( [ OCPO ] (GC 37) + [ OCPI ] (GC 35) ) + 0.0043 * [ DST1 ] (GC 38)
 CONC_GEOS_SPECS_MAPPED(:,:,:,53) = 0.4*0.9*( CONC_GEOS(:,:,:,35)+CONC_GEOS(:,:,:,98)   &
