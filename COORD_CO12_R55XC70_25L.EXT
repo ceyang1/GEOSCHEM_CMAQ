@@ -1,0 +1,77 @@
+!==========================================================================
+! Include File: COORD.EXT
+! Contains: Coordinate and domain descriptions
+! Dependent Upon:  VGRD.EXT for NLAYS
+!                  PARMS3.EXT VGTYP_GD values, e.g. VGSGPN3
+!
+! Revision History:  17 Jun 02 by Jeff Young: for horizontal grid dyn alloc
+! The definitions and declarations in this include file follow those
+! given in the I/O-API include file FDESC3C.EXT and replace similar
+! definitions.  This include file is compatible with FDESC3C.EXT.
+!
+! VGTYP_GD:
+! The vertical grid type:
+!   1: VGSIGP for sigma-P coordinates
+!   2: VGSGP0 for sigma-P0 coordinates
+!   3: VGSIGZ for sigma-Z coordinates
+!   4: VGETAP for eta-P coordinates
+!   5: VGPRES for pressure coordinates
+!   6: VGZVAL for Z (meters above ground)
+!   7: VHZVAL for H (meters above mean sea level)
+!   8: IMISS  for vertical coordinates not stored in VGLVSD
+!             (e.g., temporally or spatially changing vertical coordinates)
+
+INTEGER VGTYP_GD            ! vertical coordinate type
+DATA VGTYP_GD / VGSGPN3 /   ! 2: Sigma-P0
+
+! VGTPUN_GD:
+! The units of the vertical coordinate top.
+
+CHARACTER*16 VGTPUN_GD      ! units of vertical coordinate top
+DATA VGTPUN_GD / 'Pa' /
+
+! VGTOP_GD:
+! The value for the model top used in the definition of the sigma
+! coordinate systems in the VGTPUN_GD units
+! For sigma-P, the relationship between pressure levels P and sigma-P is
+! given by the following formula:
+!    sigma-P = ( P - VGTOP_GD ) / (P_srf - VGTOP_GD ),
+! where P_srf is the surface pressure.
+
+REAL VGTOP_GD               ! model top, for sigma coord types
+DATA VGTOP_GD  / 5000.0 /
+
+! VGLVUN_GD:
+! The units of the vertical coordinate surface values
+
+CHARACTER*16 VGLVUN_GD      ! units of vertical coordinate type
+DATA VGLVUN_GD / 'none' /
+
+! VGLVS_GD( 1...NLAYS+1 ):
+! The list of vertical coordinate surface values in the VGLVUN_GD units
+! Layer k extends from VGLVS3D( k ) to VGLVS3D( k+1 ).
+
+REAL VGLVS_GD( NLAYS+1 )    ! vertical layer surface values
+DATA VGLVS_GD / 1.0000000, 0.9975000, 0.9950000, 0.9900000, 0.9800000, &
+                0.9700000, 0.9600000, 0.9400000, 0.9200000, 0.9000000, &
+                0.8800000, 0.8600000, 0.8400000, 0.8200000, 0.8000000, &
+                0.7700000, 0.7400000, 0.7000000, 0.6500000, 0.6000000, &
+                0.5000000, 0.4000000, 0.3000000, 0.2000000, 0.1000000, &
+                0.0000000 /
+
+! X3FACE_GD( 0: NLAYS ):  1 - VGLVS_GD
+! The list of vertical coordinate surface values in the VGLVUN_GD units coverted
+! to values monotonically increasing with altitude; 
+
+REAL X3FACE_GD( 0: NLAYS )   ! Monotonically increased vertical coord values
+DATA X3FACE_GD / 0.0000000, 0.0025000, 0.0050000, 0.0100000, 0.0200000, &
+                 0.0300000, 0.0400000, 0.0600000, 0.0800000, 0.1000000, &
+                 0.1200000, 0.1400000, 0.1600000, 0.1800000, 0.2000000, &
+                 0.2300000, 0.2600000, 0.3000000, 0.3500000, 0.4000000, &
+                 0.5000000, 0.6000000, 0.7000000, 0.8000000, 0.9000000, &
+                 1.0000000 / 
+
+! GDNAME_GD:
+! The grid name used for I/O-API description
+CHARACTER*16 GDNAME_GD       ! grid name
+DATA GDNAME_GD / 'METCRO_12US2_CRO' /
