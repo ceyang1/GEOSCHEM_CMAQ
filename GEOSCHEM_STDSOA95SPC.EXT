@@ -1,0 +1,21 @@
+!============================================================================================
+! File: GEOSCHEM.EXT
+!
+! Function: This file contains parameters of GEOSCHEM output: NI, NJ, NL, NP
+! Revision History:
+!  1. Created By Zuopan Li, January 10, 2004 at The University of Tennessee, Knoxville.
+!  2. Modify all variables to merge both STD52 and Mercury into a single run.
+!                                       -- By Yun Fat Lam, 2010-04-28
+!  3. Modify all variables to merge both FULL 95 and Mercury in GEOS-Chem v11-01 into a
+!     single run.                       -- By Cheng-En Yang, 2017-07-20
+!============================================================================================
+
+! NI: Col number of GEOSCHEM output for std species
+! NJ: Row number of GEOSCHEM output for std species
+! NL: Layer number of GEOSCHEM output  for std species
+! NP_STDSOA: number of GEOSCHEM output species of interest (Full+SOA)
+!            Important!! Must follow the species number from tracerinfo.dat
+! NP: total number of GEOSCHEM output species of in terest (Full+SOA+Hg)
+
+INTEGER, PARAMETER :: NI=144, NJ=91, NL=47, NP_STDSOA=95, NP_MER=3
+INTEGER, PARAMETER :: NP = NP_STDSOA + NP_MER
