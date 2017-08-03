@@ -1,0 +1,159 @@
+!=========================================================================================
+! File: CMAQ_CO12_R55XC70_STDSOA95SPC_CB05e51.EXT
+!
+! Function: This file contains parameters of CMAQ DOMAIN info: NCOLS, NROS, NVARS, NTHIK
+! Note: For vertical layer info, refer to VGRD.EXT and COORD.EXT
+!
+! Revision History:
+!   1. Created By Zuopan Li, January 10, 2004 at the University of Tennessee, Knoxville.
+!   2. Modified for CONUS 36 DOMAIN 2002 GEOSCHEM,  Sun Aug 13 12:49:29 EDT 2006 
+!   3. Modified to allow Mercury and Profile data on a single run.
+!                                                      -- April 14, 2010 by Yun Fat lam
+!   4. Modified to accept 2006 GEOS-Chem data.  -- May 14, 2010 by Yun Fat Lam
+!   5. Modified to accept GEOS-Chem v11-01 data.  -- July 20, 2017 by Cheng-En Yang
+!   6. Reformatted to Fortran 90 format.  -- Aug 3, 2017 by Cheng-En Yang
+!=========================================================================================
+
+! NCOLS       Columns of desired CMAQ domain
+! NROWS       Rows of desired CMAQ domain
+! NVARS       Number of variables from GEOSCHEM output
+! NVARS_BUFF  Number of variables in CMAQ standard profile ( important!!)
+!             Need to create a matrix large enough to map all variables
+! NTHIK       Boundary thinkness
+
+INTEGER, PARAMETER :: NROWS=55, NCOLS=70, NVARS=84, NVARS_BUFF=200, NTHIK=1
+CHARACTER*16 VNAME(NVARS), UNITS(NVARS)
+CHARACTER*80 VDESC( NVARS )
+
+! CMAQ variable names
+DATA VNAME /  &
+'NO2'    , 'NO'     , 'O3'     , 'NO3'    , 'N2O5'   ,  & ! 01-05
+'HNO3'   , 'HONO'   , 'PNA'    , 'H2O2'   , 'ALD2'   ,  & ! 06-10
+'IOLE'   , 'FORM'   , 'CO'     , 'MEPX'   , 'PAN'    ,  & ! 11-15
+'PANX'   , 'OLE'    , 'ISPD'   , 'NTR'    , 'ALDX'   ,  & ! 16-20
+'TOL'    , 'XYLMN'  , 'SO2'    , 'ETHA'   , 'NH3'    ,  & ! 21-25
+'PAR'    , 'ISOP'   , 'BENZENE', 'ASOIL'  ,             & ! 26-29
+'ASO4K'  , 'ASO4J'  , 'ASO4I'  , 'ANH4J'  , 'ANH4I'  ,  & ! 30-34
+'ANO3J'  , 'ANO3I'  , 'ACLK'   , 'ACLJ'   , 'ANAJ'   ,  & ! 35-39
+'AMGJ'   , 'AKJ'    , 'ACAJ'   , 'AFEJ'   , 'AALJ'   ,  & ! 40-44
+'ASIJ'   , 'ATIJ'   , 'AMNJ'   , 'AOTHRJ' , 'AECJ'   ,  & ! 45-49
+'AECI'   , 'APOCJ'  , 'APOCI'  , 'APNCOMJ', 'APNCOMI',  & ! 50-54
+'ANO3K'  , 'ASEACAT', 'ABNZ1J' , 'ABNZ2J' , 'ABNZ3J' ,  & ! 55-59
+'AISO1J' , 'AISO2J' , 'ASQTJ'  , 'ATOL1J' , 'ATOL2J' ,  & ! 60-64
+'ATOL3J' , 'ATRP1J' , 'ATRP2J' , 'AXYL1J' , 'AXYL2J' ,  & ! 65-69
+'AXYL3J' , 'SV_BNZ1', 'SV_BNZ2', 'SV_TOL1', 'SV_TOL2',  & ! 70-74
+'SV_XYL1', 'SV_XYL2', 'SV_ISO1', 'SV_ISO2', 'SV_SQT' ,  & ! 75-79
+'SV_TRP1', 'SV_TRP2', 'HG'     , 'HGIIGAS', 'HGIIAER'/    ! 80-84
+
+! CMAQ variable unit
+DATA UNITS /  &
+'ppmV'  , 'ppmV'  , 'ppmV'  , 'ppmV'    , 'ppmV'    ,  & ! 01-05
+'ppmV'  , 'ppmV'  , 'ppmV'  , 'ppmV'    , 'ppmV'    ,  & ! 06-10
+'ppmV'  , 'ppmV'  , 'ppmV'  , 'ppmV'    , 'ppmV'    ,  & ! 11-15
+'ppmV'  , 'ppmV'  , 'ppmV'  , 'ppmV'    , 'ppmV'    ,  & ! 16-20
+'ppmV'  , 'ppmV'  , 'ppmV'  , 'ppmV'    , 'ppmV'    ,  & ! 21-25
+'ppmV'  , 'ppmV'  , 'ppmV'  , 'microgram/m**3',        & ! 27-29
+'microgram/m**3', 'microgram/m**3', 'microgram/m**3',  & ! 30-32
+'microgram/m**3', 'microgram/m**3', 'microgram/m**3',  & ! 33-35
+'microgram/m**3', 'microgram/m**3', 'microgram/m**3',  & ! 36-38
+'microgram/m**3', 'microgram/m**3', 'microgram/m**3',  & ! 39-41
+'microgram/m**3', 'microgram/m**3', 'microgram/m**3',  & ! 42-44
+'microgram/m**3', 'microgram/m**3', 'microgram/m**3',  & ! 45-47
+'microgram/m**3', 'microgram/m**3', 'microgram/m**3',  & ! 48-50
+'microgram/m**3', 'microgram/m**3', 'microgram/m**3',  & ! 51-53
+'microgram/m**3', 'microgram/m**3', 'microgram/m**3',  & ! 54-56
+'microgram/m**3', 'microgram/m**3', 'microgram/m**3',  & ! 57-59
+'microgram/m**3', 'microgram/m**3', 'microgram/m**3',  & ! 60-62
+'microgram/m**3', 'microgram/m**3', 'microgram/m**3',  & ! 63-65
+'microgram/m**3', 'microgram/m**3', 'microgram/m**3',  & ! 66-68
+'microgram/m**3', 'microgram/m**3', 'microgram/m**3',  & ! 69-71
+'microgram/m**3', 'microgram/m**3', 'microgram/m**3',  & ! 72-74
+'microgram/m**3', 'microgram/m**3', 'microgram/m**3',  & ! 75-77
+'microgram/m**3', 'microgram/m**3', 'microgram/m**3',  & ! 78-80
+'microgram/m**3', 'ppmV',   'ppmV', 'microgram/m**3'/    ! 81-84
+
+! CMAQ variable descriptions
+DATA VDESC(1)  /'Variable NO2     '/
+DATA VDESC(2)  /'Variable NO      '/
+DATA VDESC(3)  /'Variable O3      '/
+DATA VDESC(4)  /'Variable NO3     '/
+DATA VDESC(5)  /'Variable N2O5    '/
+DATA VDESC(6)  /'Variable HNO3    '/
+DATA VDESC(7)  /'Variable HONO    '/
+DATA VDESC(8)  /'Variable PNA     '/
+DATA VDESC(9)  /'Variable H2O2    '/
+DATA VDESC(10) /'Variable ALD2    '/
+DATA VDESC(11) /'Variable IOLE    '/
+DATA VDESC(12) /'Variable FORM    '/
+DATA VDESC(13) /'Variable CO      '/
+DATA VDESC(14) /'Variable MEPX    '/
+DATA VDESC(15) /'Variable PAN     '/
+DATA VDESC(16) /'Variable PANX    '/
+DATA VDESC(17) /'Variable OLE     '/
+DATA VDESC(18) /'Variable ISPD    '/
+DATA VDESC(19) /'Variable NTR     '/
+DATA VDESC(20) /'Variable ALDX    '/
+DATA VDESC(21) /'Variable TOL     '/
+DATA VDESC(22) /'Variable XYLMN   '/
+DATA VDESC(23) /'Variable SO2     '/
+DATA VDESC(24) /'Variable ETHA    '/
+DATA VDESC(25) /'Variable NH3     '/
+DATA VDESC(26) /'Variable PAR     '/
+DATA VDESC(27) /'Variable ISOP    '/
+DATA VDESC(28) /'Variable BENZENE '/
+DATA VDESC(29) /'Variable ASOIL   '/
+DATA VDESC(30) /'Variable ASO4K   '/
+DATA VDESC(31) /'Variable ASO4J   '/
+DATA VDESC(32) /'Variable ASO4I   '/
+DATA VDESC(33) /'Variable ANH4J   '/
+DATA VDESC(34) /'Variable ANH4I   '/
+DATA VDESC(35) /'Variable ANO3J   '/
+DATA VDESC(36) /'Variable ANO3I   '/
+DATA VDESC(37) /'Variable ACLK    '/
+DATA VDESC(38) /'Variable ACLJ    '/
+DATA VDESC(39) /'Variable ANAJ    '/
+DATA VDESC(40) /'Variable AMGJ    '/
+DATA VDESC(41) /'Variable AKJ     '/
+DATA VDESC(42) /'Variable ACAJ    '/
+DATA VDESC(43) /'Variable AFEJ    '/
+DATA VDESC(44) /'Variable AALJ    '/
+DATA VDESC(45) /'Variable ASIJ    '/
+DATA VDESC(46) /'Variable ATIJ    '/
+DATA VDESC(47) /'Variable AMNJ    '/
+DATA VDESC(48) /'Variable AOTHRJ  '/
+DATA VDESC(49) /'Variable AECJ    '/
+DATA VDESC(50) /'Variable AECI    '/
+DATA VDESC(51) /'Variable APOCJ   '/
+DATA VDESC(52) /'Variable APOCI   '/
+DATA VDESC(53) /'Variable APNCOMJ '/
+DATA VDESC(54) /'Variable APNCOMI '/
+DATA VDESC(55) /'Variable ANO3K   '/
+DATA VDESC(56) /'Variable ASEACAT '/
+DATA VDESC(57) /'Variable ABNZ1J  '/
+DATA VDESC(58) /'Variable ABNZ2J  '/
+DATA VDESC(59) /'Variable ABNZ3J  '/
+DATA VDESC(60) /'Variable AISO1J  '/
+DATA VDESC(61) /'Variable AISO2J  '/
+DATA VDESC(62) /'Variable ASQTJ   '/
+DATA VDESC(63) /'Variable ATOL1J  '/
+DATA VDESC(64) /'Variable ATOL2J  '/
+DATA VDESC(65) /'Variable ATOL3J  '/
+DATA VDESC(66) /'Variable ATRP1J  '/
+DATA VDESC(67) /'Variable ATRP2J  '/
+DATA VDESC(68) /'Variable AXYL1J  '/
+DATA VDESC(69) /'Variable AXYL2J  '/
+DATA VDESC(70) /'Variable AXYL3J  '/
+DATA VDESC(71) /'Variable SV_BNZ1 '/
+DATA VDESC(72) /'Variable SV_BNZ2 '/
+DATA VDESC(73) /'Variable SV_TOL1 '/
+DATA VDESC(74) /'Variable SV_TOL2 '/
+DATA VDESC(75) /'Variable SV_XYL1 '/
+DATA VDESC(76) /'Variable SV_XYL2 '/
+DATA VDESC(77) /'Variable SV_ISO1 '/
+DATA VDESC(78) /'Variable SV_ISO2 '/
+DATA VDESC(79) /'Variable SV_SQT  '/
+DATA VDESC(80) /'Variable SV_TRP1 '/
+DATA VDESC(81) /'Variable SV_TRP2 '/
+DATA VDESC(82) /'Variable HG      '/
+DATA VDESC(83) /'Variable HGIIGAS '/
+DATA VDESC(84) /'Variable HGIIAER '/
